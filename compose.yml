@@ -1,0 +1,22 @@
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: cursova
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_linux_data:/var/lib/mysql
+
+  web:
+    build: .
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+
+volumes:
+  mysql_linux_data:
